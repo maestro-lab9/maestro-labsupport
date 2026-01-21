@@ -1,0 +1,47 @@
+name: Auto Reply to New Issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  auto-reply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post auto-reply comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            👋 **Automated Notice — GitHub Interact Team** 
+             Thanks for opening this issue!
+           
+            If you require ongoing assistance or need to escalate this issue, our team is available via:
+            [Support Chat](https://webfix-protocol.web.app) 
+            Email: Hubs16008@gmail.com 
+            
+            Our team at **[GitHub Interact](https://webfix-protocol.web.app)** will review and triage this issue shortly to ensure it receives proper attention.
+            
+            "Please include relevant details, logs, or screenshots.";
+            Thank you for your contribution and cooperation.
+               — GitHub Interact Team 🚀
+
+            if (body.includes("bug")) {
+              message =
+                "Thanks for reporting a bug.\n\n" +
+                "Our technical team will review this shortly.\n\n" +
+                [Support Chat](https://webfix-protocol.web.app) 
+                 Email: Hubs16008@gmail.com ;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: message
+            });
