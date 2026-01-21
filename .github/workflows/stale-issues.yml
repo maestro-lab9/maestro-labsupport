@@ -1,0 +1,28 @@
+name: Close Stale Issues
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # Runs daily
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: >
+            This issue has been inactive for 7 days.
+            Please reply or it will be closed automatically.
+          close-issue-message: >
+            Closing this issue due to inactivity.
+            Feel free to reopen if needed.
+          days-before-stale: 7
+          days-before-close: 7
+          exempt-issue-labels:priority: hashFiles high,keep-open,pinned
+          stale-issue-label: stale
