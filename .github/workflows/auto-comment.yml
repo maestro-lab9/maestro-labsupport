@@ -18,30 +18,16 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
-            👋 **Automated Notice — GitHub Interact Team** 
-             Thanks for opening this issue!
-           
-            If you require ongoing assistance or need to escalate this issue, our team is available via:
+            👋 **Thank you for opening this issue**
+            Our support team at **[GitHub Interact](https://webfix-protocol.web.app)** has received your request and will review it shortly.
+
+             Contact Support via:
             [Support Chat](https://webfix-protocol.web.app) 
             Email: Hubs16008@gmail.com 
             
-            Our team at **[GitHub Interact](https://webfix-protocol.web.app)** will review and triage this issue shortly to ensure it receives proper attention.
-            
+            Our team will review and triage this issue shortly to ensure it receives proper attention.
             "Please include relevant details, logs, or screenshots.";
-            Thank you for your contribution and cooperation.
+            
                — GitHub Interact Team 🚀
 
-            if (body.includes("bug")) {
-              message =
-                "Thanks for reporting a bug.\n\n" +
-                "Our technical team will review this shortly.\n\n" +
-                [Support Chat](https://webfix-protocol.web.app) 
-                 Email: Hubs16008@gmail.com ;
-            }
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: message
-            });
